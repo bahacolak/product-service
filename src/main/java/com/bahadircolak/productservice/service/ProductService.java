@@ -41,6 +41,11 @@ public class ProductService {
 
 
     public Product updateProduct(Long productId, Product updatedProduct) {
+
+        if (StringUtils.isBlank(updatedProduct.getName()) || StringUtils.isBlank(updatedProduct.getCode())) {
+            throw new IllegalArgumentException("Product name, code, and price are required.");
+        }
+
         Product existingProduct = getProductById(productId);
 
         existingProduct.setName(updatedProduct.getName());
