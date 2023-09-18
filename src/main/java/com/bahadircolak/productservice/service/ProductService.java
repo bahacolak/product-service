@@ -30,9 +30,6 @@ public class ProductService {
         }
     }
 
-
-
-
     public List<Product> getAllProducts() {
         return productRepository.findByDeletedFalse();
     }
@@ -64,7 +61,10 @@ public class ProductService {
     }
 
     public List<Product> searchProducts(String name, String code, String brand, Double minPrice, Double maxPrice) {
-
+        if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
+            throw new IllegalArgumentException("Minimum price cannot be greater than maximum price.");
+        }
         return productRepository.findActiveProductsByNameCodeBrandAndPriceRange(name, code, brand, minPrice, maxPrice);
     }
+
 }
