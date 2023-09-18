@@ -2,6 +2,7 @@ package com.bahadircolak.productservice.service;
 
 import com.bahadircolak.productservice.model.Product;
 import com.bahadircolak.productservice.repository.ProductRepository;
+import com.bahadircolak.productservice.web.dto.ProductDto;
 import com.bahadircolak.productservice.web.request.ProductRequest;
 import io.micrometer.common.util.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -50,21 +51,20 @@ public class ProductService {
     }
 
 
-    public Product updateProduct(Long productId, Product updatedProduct) {
-
-        if (StringUtils.isBlank(updatedProduct.getName()) || StringUtils.isBlank(updatedProduct.getCode())) {
+    public Product updateProduct(Long productId, ProductDto updatedProductDto) {
+        if (StringUtils.isBlank(updatedProductDto.getName()) || StringUtils.isBlank(updatedProductDto.getCode())) {
             throw new IllegalArgumentException("Product name, code, and price are required.");
-        }//burada olmayacak
+        }
 
         Product existingProduct = getProductById(productId);
 
-        existingProduct.setName(updatedProduct.getName());
-        existingProduct.setCode(updatedProduct.getCode());
-        existingProduct.setDescription(updatedProduct.getDescription());
-        existingProduct.setBrand(updatedProduct.getBrand());
-        existingProduct.setCurrency(updatedProduct.getCurrency());
-        existingProduct.setPrice(updatedProduct.getPrice());
-        existingProduct.setStock(updatedProduct.getStock());
+        existingProduct.setName(updatedProductDto.getName());
+        existingProduct.setCode(updatedProductDto.getCode());
+        existingProduct.setDescription(updatedProductDto.getDescription());
+        existingProduct.setBrand(updatedProductDto.getBrand());
+        existingProduct.setCurrency(updatedProductDto.getCurrency());
+        existingProduct.setPrice(updatedProductDto.getPrice());
+        existingProduct.setStock(updatedProductDto.getStock());
 
         return productRepository.save(existingProduct);
     }

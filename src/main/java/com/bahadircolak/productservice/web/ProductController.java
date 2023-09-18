@@ -2,6 +2,7 @@ package com.bahadircolak.productservice.web;
 
 import com.bahadircolak.productservice.model.Product;
 import com.bahadircolak.productservice.service.ProductService;
+import com.bahadircolak.productservice.web.dto.ProductDto;
 import com.bahadircolak.productservice.web.request.ProductRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,8 +44,8 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public Product updateProduct(@PathVariable Long productId, @RequestBody Product product) {
-        return productService.updateProduct(productId, product);
+    public Product updateProduct(@PathVariable Long productId, @RequestBody ProductDto updatedProductDto) {
+        return productService.updateProduct(productId, updatedProductDto);
     }
 
     @DeleteMapping("/{productId}")
