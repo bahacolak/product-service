@@ -26,28 +26,22 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             FilterChain chain
     ) throws IOException, ServletException {
         try {
-            // Extract the JWT token from the request's Authorization header
             String token = extractJwtFromRequest(request);
 
             if (token != null && jwtUtils.validateJwtToken(token)) {
-                // If the token is valid, extract the username from it
                 String username = jwtUtils.getUsernameFromJwtToken(token);
 
-                // Create an Authentication object with the username and empty credentials
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList());
 
-                // Set the Authentication in the SecurityContext
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            // Handle any exceptions here
         }
 
-        chain.doFilter(request, response); // Continue with the filter chain
+        chain.doFilter(request, response);
     }
 
-    // Helper method to extract the JWT token from the request's Authorization header
     private String extractJwtFromRequest(HttpServletRequest request) {
         String header = request.getHeader("Authorization");
 

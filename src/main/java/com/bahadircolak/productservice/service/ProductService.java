@@ -22,7 +22,7 @@ public class ProductService {
     public Product createProduct(ProductRequest productRequest) {
         if (productRequest == null || StringUtils.isBlank(productRequest.getName()) || StringUtils.isBlank(productRequest.getCode())) {
             throw new IllegalArgumentException("Product, name, code, and price are required.");
-        }
+        } //burada olmayacak
 
         Product product = new Product();
         product.setName(productRequest.getName());

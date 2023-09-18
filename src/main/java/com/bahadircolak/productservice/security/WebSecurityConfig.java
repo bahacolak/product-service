@@ -34,7 +34,7 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtUtils), UsernamePasswordAuthenticationFilter.class)
-                .httpBasic(Customizer.withDefaults()); // You can customize this as needed
+                .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 }
