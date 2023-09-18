@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "4c50bd34-8f85-408b-ad92-01354d813861",
+		"name": "product-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "22312210",
+		"_collection_link": "https://crimson-meteor-88344.postman.co/workspace/My-Workspace~661dcd9b-484a-47f4-8d9c-a02b4d7c8097/collection/22312210-4c50bd34-8f85-408b-ad92-01354d813861?action=share&source=collection_link&creator=22312210"
+	},
+	"item": [
+		{
+			"name": "addProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"iphone15\",\r\n    \"code\": \"2211\",\r\n    \"description\": \"iphone15 kirmizi\",\r\n    \"brand\": \"Apple\",\r\n    \"currency\": \"USD\",\r\n    \"price\": 1100.00,\r\n    \"stock\": 41\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products"
+			},
+			"response": []
+		},
+		{
+			"name": "getProducts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products"
+			},
+			"response": []
+		},
+		{
+			"name": "getProductById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "updateProduct",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Updated Product Name\",\r\n    \"code\": \"UPD123\",\r\n    \"description\": \"Updated product description\",\r\n    \"brand\": \"Updated Brand\",\r\n    \"currency\": \"USD\",\r\n    \"price\": 49.99,\r\n    \"stock\": 100\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProduct",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "searchProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/search?name=iphone15&code=2211&brand=Apple&minPrice=1100&maxPrice=1300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "iphone15"
+						},
+						{
+							"key": "code",
+							"value": "2211"
+						},
+						{
+							"key": "brand",
+							"value": "Apple"
+						},
+						{
+							"key": "minPrice",
+							"value": "1100"
+						},
+						{
+							"key": "maxPrice",
+							"value": "1300"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

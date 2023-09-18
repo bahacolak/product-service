@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -80,6 +81,10 @@ public class ProductService {
             throw new IllegalArgumentException("Minimum price cannot be greater than maximum price.");
         }//burada olmayacak
         return productRepository.findActiveProductsByNameCodeBrandAndPriceRange(name, code, brand, minPrice, maxPrice);
+    }
+
+    public List<Product> findProductsMarkedForDeletion(LocalDateTime currentTime) {
+        return productRepository.findProductsByDeletionTimeBefore(currentTime);
     }
 
 }
