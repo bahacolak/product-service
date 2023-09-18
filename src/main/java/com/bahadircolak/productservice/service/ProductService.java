@@ -45,7 +45,7 @@ public class ProductService {
     }
 
     public Product getProductById(Long productId) {
-        return productRepository.findById(productId)
+        return productRepository.findByIdAndDeletedFalse(productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found."));
     }
 
@@ -54,7 +54,7 @@ public class ProductService {
 
         if (StringUtils.isBlank(updatedProduct.getName()) || StringUtils.isBlank(updatedProduct.getCode())) {
             throw new IllegalArgumentException("Product name, code, and price are required.");
-        }
+        }//burada olmayacak
 
         Product existingProduct = getProductById(productId);
 
@@ -78,7 +78,7 @@ public class ProductService {
     public List<Product> searchProducts(String name, String code, String brand, Double minPrice, Double maxPrice) {
         if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
             throw new IllegalArgumentException("Minimum price cannot be greater than maximum price.");
-        }
+        }//burada olmayacak
         return productRepository.findActiveProductsByNameCodeBrandAndPriceRange(name, code, brand, minPrice, maxPrice);
     }
 

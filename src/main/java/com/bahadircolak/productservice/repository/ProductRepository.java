@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByDeletedFalse();
+
+    Optional<Product> findByIdAndDeletedFalse(Long id);
 
     @Query("SELECT p FROM Product p WHERE " +
             "(:name IS NULL OR p.name LIKE %:name%) AND " +
