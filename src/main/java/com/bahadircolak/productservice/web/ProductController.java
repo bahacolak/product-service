@@ -1,4 +1,4 @@
-package com.bahadircolak.productservice.controller;
+package com.bahadircolak.productservice.web;
 
 import com.bahadircolak.productservice.model.Product;
 import com.bahadircolak.productservice.service.ProductService;

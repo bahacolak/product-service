@@ -2,6 +2,7 @@ package com.bahadircolak.productservice.service;
 
 import com.bahadircolak.productservice.model.Product;
 import com.bahadircolak.productservice.repository.ProductRepository;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,8 +19,19 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
-        return productRepository.save(product);
+        if (product == null || StringUtils.isBlank(product.getName()) || StringUtils.isBlank(product.getCode())) {
+            throw new IllegalArgumentException("Product, name, code, and price are required.");
+        }
+
+        try {
+            return productRepository.save(product);
+        } catch (Exception ex) {
+            throw new RuntimeException("An error occurred while saving the product.", ex);
+        }
     }
+
+
+
 
     public List<Product> getAllProducts() {
         return productRepository.findByDeletedFalse();
