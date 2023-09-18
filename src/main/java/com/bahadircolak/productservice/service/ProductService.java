@@ -2,6 +2,7 @@ package com.bahadircolak.productservice.service;
 
 import com.bahadircolak.productservice.model.Product;
 import com.bahadircolak.productservice.repository.ProductRepository;
+import com.bahadircolak.productservice.web.request.ProductRequest;
 import io.micrometer.common.util.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,19 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product createProduct(Product product) {
-        if (product == null || StringUtils.isBlank(product.getName()) || StringUtils.isBlank(product.getCode())) {
+    public Product createProduct(ProductRequest productRequest) {
+        if (productRequest == null || StringUtils.isBlank(productRequest.getName()) || StringUtils.isBlank(productRequest.getCode())) {
             throw new IllegalArgumentException("Product, name, code, and price are required.");
         }
+
+        Product product = new Product();
+        product.setName(productRequest.getName());
+        product.setCode(productRequest.getCode());
+        product.setDescription(productRequest.getDescription());
+        product.setBrand(productRequest.getBrand());
+        product.setCurrency(productRequest.getCurrency());
+        product.setPrice(productRequest.getPrice());
+        product.setStock(productRequest.getStock());
 
         try {
             return productRepository.save(product);

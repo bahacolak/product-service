@@ -2,6 +2,7 @@ package com.bahadircolak.productservice.web;
 
 import com.bahadircolak.productservice.model.Product;
 import com.bahadircolak.productservice.service.ProductService;
+import com.bahadircolak.productservice.web.request.ProductRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class ProductController {
 
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public Product createProduct(@RequestBody ProductRequest productRequest) {
+        return productService.createProduct(productRequest);
     }
 
     @GetMapping
